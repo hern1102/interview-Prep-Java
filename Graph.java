@@ -1,8 +1,6 @@
 /*
 How to implement a graph from scratch:  View code below
 
-
-
 When is the best time to implement a graph?
 
 
@@ -13,7 +11,7 @@ Look up time and insertion time:
 */
 
 public class Graph{
-  private HashMap<Integer, Node> nodeLookup = new HashMap<Integer, Node>();
+  private HashMap<Integer, Node> nodeLookup = new HashMap<Integer, Node>();  //would be used for getNode and addEdge to get access to a particular node
   
   public static class Node {
     private int id;
@@ -23,7 +21,7 @@ public class Graph{
     }
   }
   
-  private Node getNode(int id){...}
+  private Node getNode(int id){...}.  //using the HashMap nodeLookup to get node using O(1) lookup time.
   
   
   public void addEdge(int source, int destination){
@@ -35,7 +33,7 @@ public class Graph{
   public boolean hasPathDFS(int source, int destination){. //out facing method
     Node s = getNode(source); 
     Node d = getNode(destination);
-    HashSet<Integer> visited. = new HashSet<>();  //this will stop you from going into an infinite loop, by checking if you've visited the node before
+    HashSet<Integer> visited = new HashSet<>();  //replacement for flags, so you don't have to add a flag to a node, and still track what you have visited
     return hasPathDFS(s, d, visited);     
   }
   
@@ -47,7 +45,7 @@ public class Graph{
     visited.add(source.id); //adding the node that we are checking into the hashset
     if(source == destination) return true;   //we have found the node that we were looking for
     
-    for(Node child: source.adjacent){   //we have not found the node, we are going to check all of the current nodes adjacent nodes
+    for(Node child: source.adjacent){   //we have not found the node, we are going to check all of the current nodes adjacent nodes (LinkedList in Graph class)
       if(hasPathDFS(child, destination, visited)) return true;
     }
     
@@ -62,7 +60,7 @@ public class Graph{
     while(!nextToVisit.isEmpty()){
       Node node = nextToVisit.remove();
       
-      if(node == destination) return true; found the node that you are looking for
+      if(node == destination) return true; //found the node that you are looking for
       
       if(visited.contains(source.id)) continue; 
       
