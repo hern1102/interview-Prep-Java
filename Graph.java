@@ -21,14 +21,19 @@ public class Graph{
     }
   }
   
-  private Node getNode(int id){...}.  //using the HashMap nodeLookup to get node using O(1) lookup time.
+  private Node getNode(int id){...}.  //using the HashMap nodeLookup to get node using O(1) lookup time then returns Node
   
   
-  public void addEdge(int source, int destination){
-     Node s = getNode(source);
-     Node d = getNode(destination);
-     s.adjacent.add(d);
-  }
+//   public void addEdge(int source, int destination){
+//      Node s = getNode(source);
+//      Node d = getNode(destination);
+//      s.adjacent.add(d);
+//   }
+    
+    
+    
+    
+    
   
   public boolean hasPathDFS(int source, int destination){. //out facing method
     Node s = getNode(source); 
@@ -37,9 +42,11 @@ public class Graph{
     return hasPathDFS(s, d, visited);     
   }
   
-  private boolean hasPathDFS(Node source, Node destination, HashSet<Integer> visited){  //behind the scene method
-    if(visited.contains(source.id)){
-      return false;  //if the hashset already contains the source id, then we have already checked to see if it was our destination and determined that it wasn't
+  
+  
+    private boolean hasPathDFS(Node source, Node destination, HashSet<Integer> visited){  //behind the scene method
+      if(visited.contains(source.id)){
+        return false;  //if the hashset already contains the source id, then we have already checked to see if it was our destination and determined that it wasn't
     }
     
     visited.add(source.id); //adding the node that we are checking into the hashset
@@ -48,12 +55,22 @@ public class Graph{
     for(Node child: source.adjacent){   //we have not found the node, we are going to check all of the current nodes adjacent nodes (LinkedList in Graph class)
       if(hasPathDFS(child, destination, visited)) return true;
     }
-    
     //if we have checked every node in the graph and haven't found the destination node, return false
     return false;
   }
   
-  public boolean hasPathBFS(int source, int destination){
+  
+  
+  
+  
+  
+  
+  Public boolean hasPathBFS(int source, int destination){ //method that the user would access
+    return hasPathBFS(getNode(source), getNode(destination));
+  }
+  
+  
+  private boolean hasPathBFS(Node source, Node destination){   //behind the scenes method
     LinkedList<Node> nextToVisit = new LinkedList<>();
     HashSet<Integer> visited = new HashSet<>();
     nextToVisit.add(source);
